@@ -32,7 +32,7 @@ describe('Testes da Fila', () => {
     });
 
     test('Testa a busca por indice', ()=>{
-        let f = Fila(new No(1));
+        let f = new Fila(new No(1));
         f.adicionar(new No(2));
         f.adicionar(new No(3));
 

@@ -50,6 +50,7 @@ class Fila{
 
         while(i<idx){
             p = p.proximo;
+            i++;
         }
         return p.dado
     }
