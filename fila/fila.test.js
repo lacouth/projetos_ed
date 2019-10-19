@@ -17,6 +17,12 @@ describe('Testes da Fila', () => {
         expect(f.mostrarElemento()).toBe(p);
         expect(f.vazio()).toBe(false);
     });
+    test('Adicionar no em fila vazia',()=>{
+        let f = new Fila;
+        f.adicionar(new No(0));
+        expect(f.mostrarElemento()).toBe(0);
+        expect(f.tamanho).toBe(1);
+    })
     test('Criar fila com 2 nós',()=>{
         let p = new Paciente('Fulano',33);
         let n = new No(p);
@@ -40,4 +46,10 @@ describe('Testes da Fila', () => {
         expect(f.elemento(1)).toBe(2);
         expect(f.elemento(2)).toBe(3);
     })
+
+    test('remover nó', () => {
+        let f = new Fila(new No(1));
+        f.remover();
+        expect(f.tamanho).toBe(0);
+    });
 });

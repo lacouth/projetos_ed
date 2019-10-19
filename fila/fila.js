@@ -10,18 +10,27 @@ class Fila{
     }
 
     adicionar(no){
-        let p = this._inicio; 
-        while(p.proximo!=null){
-            p = p.proximo;
+        if(this._inicio){
+            let p = this._inicio; 
+            while(p.proximo!=null){
+                p = p.proximo;
+            }
+            p.proximo = no;
+        }else{
+            this._inicio = no;
         }
-        p.proximo = no;
         this._tamanho++;
     }
 
     remover(){
-        let p = this._inicio
-        this._inicio = this._inicio.proximo
-        return p.dado;
+        if(this._tamanho){
+            let p = this._inicio
+            this._inicio = this._inicio.proximo
+            this._tamanho--;
+            return p.dado;
+        }else{
+            return null;
+        }
     }    
 
     vazio(){
