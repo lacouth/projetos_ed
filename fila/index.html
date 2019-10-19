@@ -11,9 +11,15 @@
 
 <body>
     <div id="app">
+        
         <h1>SUS.js</h1> 
         <input v-model="nome" type="text" id="input_nome"> <button v-on:click="adicionar">Adicionar</button>
-        <h2 >{{topo}}</h2>
+        <h2>Próximo</h2>
+        <h3>{{topo}}</h3> <button v-on:click="remover">Atender</button>
+        <h3>Fila: </h3>
+        <ul>
+            <li v-for = "item in fila">{{item}}</li>
+        </ul>
 
     </div>
     <script src="vue.js"></script>

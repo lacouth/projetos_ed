@@ -52,4 +52,13 @@ describe('Testes da Fila', () => {
         f.remover();
         expect(f.tamanho).toBe(0);
     });
+
+    test('Obter todos elementos da fila',()=>{
+        let f = new Fila(new No(0));
+        f.adicionar(new No(1));
+        f.adicionar(new No(2));
+        f.adicionar(new No(3));
+        expect(f.obterFilaCompleta()).toStrictEqual([0,1,2,3])
+    })
+
 });

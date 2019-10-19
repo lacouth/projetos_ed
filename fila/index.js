@@ -6,13 +6,20 @@ var app = new Vue({
     el: '#app',
     data: {
         nome : '',
-        topo: f.mostrarElemento()
+        topo: '',
+        fila : []
     },
     methods:{
         adicionar: function (event){
             f.adicionar(new No(this.nome));
-            this.topo = f.mostrarElemento()
-            console.log(f.tamanho)
+            this.topo = f.mostrarElemento();
+            this.fila = f.obterFilaCompleta();
+            this.nome = '';
+        },
+        remover: function(event){
+            f.remover();
+            this.topo = f.mostrarElemento();
+            this.fila = f.obterFilaCompleta();
         }
     }
 })

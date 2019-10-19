@@ -63,6 +63,18 @@ class Fila{
         return p.dado
     }
 
+    obterFilaCompleta(){
+        let fila = [];
+        if(this._tamanho){
+            let p = this._inicio;
+            while(p!=null){
+                fila.push(p.dado);
+                p = p.proximo;
+            }
+        }
+        return fila;
+    }
+
 }
 
 export{Fila}
