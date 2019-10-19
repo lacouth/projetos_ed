@@ -1,5 +1,3 @@
-import{No} from '../no/no' 
-
 class Fila{
     
     constructor(inicio=null){
