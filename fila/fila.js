@@ -37,7 +37,8 @@ class Fila{
         return this._tamanho == 0
     }
     mostrarElemento(){
-        return this._inicio.dado
+        if(this._tamanho)
+            return this._inicio.dado
     }
 
     ultimo(){
