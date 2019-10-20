@@ -5,23 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
     <title>Document</title>
 
 </head>
 
 <body>
-    <div id="app">
-        
-        <h1>SUS.js</h1> 
-        <input v-model="nome" type="text" id="input_nome"> <button v-on:click="adicionar">Adicionar</button>
-        <h2>Próximo</h2>
-        <h3>{{topo}}</h3> <button v-on:click="remover">Atender</button>
+    <div id="app" class="container">
+        <!-- As a heading -->
+        <nav class="navbar navbar-dark bg-dark">
+            <span class="navbar-brand mb-0 h1">ED - Fila</span>
+        </nav>
+
+        <h1>SUS.js</h1>
+        <input v-model="nome" type="text" id="input_nome"> <button class="btn btn-primary" v-on:click="adicionar">Adicionar</button>
+        <h2>Próximo na fila:</h2>
+        <h3>{{topo}}</h3> 
+        <button class="btn btn-success btn-lg btn-block" v-on:click="remover">Atender</button>
         <h3>Fila: </h3>
         <ul>
-            <li v-for = "item in fila">{{item}}</li>
+            <li v-for="item in fila">{{item}}</li>
         </ul>
 
     </div>
+    <!-- <script src="../css/bootstrap.bundle.min.js"></script> -->
     <script src="vue.js"></script>
     <script type="module" src="index.js"></script>
 </body>
