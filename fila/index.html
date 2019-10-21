@@ -18,14 +18,38 @@
         </nav>
 
         <h1>SUS.js</h1>
-        <input v-model="nome" type="text" id="input_nome"> <button class="btn btn-primary" v-on:click="adicionar">Adicionar</button>
+        <div class="form-row">
+            <div class="col">
+                <input v-model="nome" type="text" id="input_nome" class="form-control" >
+            </div>
+            <div class="col">
+                <input v-model="idade" type="text" id="input_idade"class="form-control" >
+            </div>
+            <div class="col">
+                <button class="btn btn-primary" v-on:click="adicionar">Adicionar</button>
+            </div>
+        </div>
+
         <h2>Próximo na fila:</h2>
-        <h3>{{topo}}</h3> 
+        <h3>{{topo.nome || "Fila Vazia"}}</h3> 
         <button class="btn btn-success btn-lg btn-block" v-on:click="remover">Atender</button>
         <h3>Fila: </h3>
-        <ul>
-            <li v-for="item in fila">{{item}}</li>
-        </ul>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Idade</th>
+                <th scope="col">Chegada</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in fila">
+                <td>{{item.nome}}</td>
+                <td>{{item.idade}}</td>
+                <td>{{item.hora}}</td>
+              </tr>
+            </tbody>
+        </table>
 
     </div>
     <!-- <script src="../css/bootstrap.bundle.min.js"></script> -->

@@ -39,6 +39,7 @@ class Fila{
     mostrarElemento(){
         if(this._tamanho)
             return this._inicio.dado
+        return '';
     }
 
     ultimo(){
