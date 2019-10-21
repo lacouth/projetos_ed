@@ -51,7 +51,7 @@ class Fila{
     }
 
     elemento(idx){
-        if(idx>=this.tamanho){
+        if(idx>=this._tamanho){
             return null;
         }
         let i = 0;
