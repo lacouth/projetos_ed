@@ -121,7 +121,7 @@ describe("Testes da Lista",()=>{
         expect(l.tamanho).toBe(3)
     })
 
-    test('Remover indice inválido',()=>{
+    test('Remover índice inválido',()=>{
         let l = new Lista(new No(0));
         l.adicionar(new No(1));
         l.adicionar(new No(2));

@@ -1,4 +1,4 @@
-import {No} from '../no/no'
+import {No} from '../no/no.js'
 class Lista{
     constructor(inicio = null){
         this._inicio = inicio;
@@ -33,7 +33,7 @@ class Lista{
 
     elemento(idx){
 
-        if(idx>this._tamanho){
+        if(idx>this._tamanho || this._tamanho==0){
             return null;
         }
         let p = this._inicio;
@@ -74,7 +74,7 @@ class Lista{
             p.proximo = p.proximo.proximo;
             this._tamanho--;
         }else{
-            console.log("indíce inválido", idx);
+            console.log("índice inválido", idx);
         }
     }
 

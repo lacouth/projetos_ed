@@ -9,13 +9,15 @@ var app = new Vue({
         nome : '',
         idade: '',
         topo: '',
-        fila: ''
+        fila: '',
+        tamanho: 0
     },
     methods:{
         adicionar: function (event){
             f.adicionar(new No(new Paciente(this.nome,this.idade)));
             this.topo = f.mostrarElemento();
             this.fila = f.obterFilaCompleta();
+            this.tamanho = f.tamanho;
             this.nome = '';
             this.idade = '';
         },
@@ -23,6 +25,7 @@ var app = new Vue({
             f.remover();
             this.topo = f.mostrarElemento();
             this.fila = f.obterFilaCompleta();
+            this.tamanho = f.tamanho;
         }
     }
 })
