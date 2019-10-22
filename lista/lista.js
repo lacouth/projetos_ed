@@ -1,3 +1,4 @@
+import {No} from '../no/no'
 class Lista{
     constructor(inicio = null){
         this._inicio = inicio;
@@ -6,6 +7,10 @@ class Lista{
 
     get tamanho(){
         return this._tamanho;
+    }
+
+    get inicio(){
+        return this._inicio;
     }
 
     vazio(){
@@ -46,15 +51,31 @@ class Lista{
             }
             no.proximo = p.proximo;
             p.proximo = no;
+            this._tamanho++;
         }else if(idx==0){
             no.proximo = this._inicio;
             this._inicio = no;
+            this._tamanho++;
         }else{
-            while(p.proximo!=null){
+            this.adicionar(no)
+        }  
+    }
+
+    remover(idx){
+        let p = this._inicio;
+
+        if(idx==0){
+            this._inicio = this._inicio.proximo;
+            this._tamanho--;
+        }else if(idx<this._tamanho){
+            for(let i=0;i<idx-1;i++){
                 p = p.proximo;
             }
-            p.proximo = no;
-        }  
+            p.proximo = p.proximo.proximo;
+            this._tamanho--;
+        }else{
+            console.log("indíce inválido", idx);
+        }
     }
 
     obterListaCompleta(){
@@ -69,7 +90,32 @@ class Lista{
         return lista;
     }
 
-
+    ordenar(comparador){
+        let novaLista = new Lista;
+        let p;
+        let i;
+        let pos;
+        let menor;
+        while(!this.vazio()){
+            menor = this._inicio;
+            p = this._inicio.proximo;
+            
+            i = 1;     // refere-se ao indíce do p
+            pos = 0;   // refere-se ao indíce do menor
+            while(p!=null){
+                if(comparador(p.dado,menor.dado)){
+                    menor = p;
+                    pos = i;
+                }
+                p = p.proximo;
+                i++;
+            }
+            novaLista.adicionar(new No(menor.dado));
+            this.remover(pos);
+        }
+        this._tamanho = novaLista.tamanho;
+        this._inicio = novaLista.inicio;
+    }
 }
 
 export{Lista}
