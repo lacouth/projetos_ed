@@ -90,7 +90,35 @@ class Lista{
         return lista;
     }
 
-    ordenar(comparador){
+    ordenar(comparador, bruteForce=false){
+        if(!bruteForce){
+            this.bubbleSort(comparador)
+        }else{
+            this.insertionSort(comparador)
+        }
+        
+    }
+
+    bubbleSort(comparador){
+        let mudanca = false;
+        let p = this._inicio;
+        let aux;
+        do{
+            mudanca = false;
+            p = this._inicio;
+            while(p.proximo!=null){
+                if(!comparador(p.dado,p.proximo.dado)){
+                    aux = p.dado;
+                    p.dado = p.proximo.dado;
+                    p.proximo.dado = aux;
+                    mudanca = true;
+                }
+                p = p.proximo;
+            }
+        }while(mudanca);
+    }
+
+    insertionSort(comparador){
         let novaLista = new Lista;
         let p;
         let i;

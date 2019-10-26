@@ -132,7 +132,17 @@ describe("Testes da Lista",()=>{
         expect(l.tamanho).toBe(4)
     })
 
-    test('Ordenaçao da lista',()=>{
+    test('Ordenaçao da lista pela força bruta',()=>{
+        let l = new Lista(new No(5));
+        l.adicionar(new No(4));
+        l.adicionar(new No(3));
+        l.adicionar(new No(2));
+        l.adicionar(new No(1));
+        l.ordenar((a,b)=>a<b,true);
+        expect(l.obterListaCompleta()).toStrictEqual([1,2,3,4,5]);
+    })
+
+    test('Ordenaçao da lista pelo bubblesort',()=>{
         let l = new Lista(new No(5));
         l.adicionar(new No(4));
         l.adicionar(new No(3));
@@ -154,11 +164,30 @@ describe("Testes da Lista",()=>{
         l.adicionar(new No(p3));
         l.adicionar(new No(p4));
 
+        l.ordenar((a,b)=>a.nome<b.nome, true);
+
+        expect(l.obterListaCompleta()).toStrictEqual([p4,p3,p2,p1])
+
+    })
+
+    test('Ordenação da lista de pacientes por nome usando bubblesort',()=>{
+        let l = new Lista;
+        let p1 = new Paciente('z',4);
+        let p2 = new Paciente('y',3);
+        let p3 = new Paciente('x',2);
+        let p4 = new Paciente('w',1);
+
+        l.adicionar(new No(p1));
+        l.adicionar(new No(p2));
+        l.adicionar(new No(p3));
+        l.adicionar(new No(p4));
+
         l.ordenar((a,b)=>a.nome<b.nome);
 
         expect(l.obterListaCompleta()).toStrictEqual([p4,p3,p2,p1])
 
     })
+
     test('Ordenação da lista de pacientes por idade',()=>{
         let l = new Lista;
         let p1 = new Paciente('z',4);
@@ -171,7 +200,24 @@ describe("Testes da Lista",()=>{
         l.adicionar(new No(p3));
         l.adicionar(new No(p4));
 
-        l.ordenar((a,b)=>a.idade<b.idade);
+        l.ordenar((a,b)=>a.idade<b.idade, true);
+
+        expect(l.obterListaCompleta()).toStrictEqual([p4,p3,p2,p1])
+
+    })
+    test('Ordenação da lista de pacientes por idade usando bubblesort',()=>{
+        let l = new Lista;
+        let p1 = new Paciente('z',4);
+        let p2 = new Paciente('y',3);
+        let p3 = new Paciente('x',2);
+        let p4 = new Paciente('w',1);
+
+        l.adicionar(new No(p1));
+        l.adicionar(new No(p2));
+        l.adicionar(new No(p3));
+        l.adicionar(new No(p4));
+
+        l.ordenar((a,b)=>a.idade<b.idade, true);
 
         expect(l.obterListaCompleta()).toStrictEqual([p4,p3,p2,p1])
 
@@ -188,7 +234,24 @@ describe("Testes da Lista",()=>{
         l.adicionar(new No(p3));
         l.adicionar(new No(p4));
 
-        l.ordenar((a,b)=>a.hora<b.hora);
+        l.ordenar((a,b)=>a.hora<b.hora, true);
+
+        expect(l.obterListaCompleta()).toStrictEqual([p1,p2,p3,p4])
+
+    })
+    test('Ordenação da lista de pacientes por hora usando o bubblesort',()=>{
+        let l = new Lista;
+        let p1 = new Paciente('z',4);
+        let p2 = new Paciente('y',3);
+        let p3 = new Paciente('x',2);
+        let p4 = new Paciente('w',1);
+
+        l.adicionar(new No(p1));
+        l.adicionar(new No(p2));
+        l.adicionar(new No(p3));
+        l.adicionar(new No(p4));
+
+        l.ordenar((a,b)=>a.hora<b.hora, true);
 
         expect(l.obterListaCompleta()).toStrictEqual([p1,p2,p3,p4])
 

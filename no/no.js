@@ -8,12 +8,16 @@ class No{
         return this._dado;
     }
 
+    set dado(d){
+        this._dado = d;
+    }
+
     get proximo(){
-        return this._proximo
+        return this._proximo;
     }
 
     set proximo(p){
-        this._proximo = p
+        this._proximo = p;
     }
 }
 
