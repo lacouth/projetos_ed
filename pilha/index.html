@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <title>Document</title>
+
+</head>
+
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <span class="navbar-brand mb-0 h1">ED </span>
+    </nav>
+    <div id="app" class="container-fluid m-2">
+        <h1>Pilha</h1>
+
+        <div class="form-row m-2 mx-auto" style="width: 50%;">
+            <div class="col">
+                <input v-model="nome" type="text" id="input_nome" class="form-control" placeholder="Nome">
+            </div>
+            <div class="col">
+                <input v-model="idade" type="text" id="input_idade" class="form-control" placeholder="Idade">
+            </div>
+            <div class="col">
+                <button class="btn btn-primary" v-on:click="adicionar">Adicionar</button>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-8">
+                <div class="card m-2">
+                    <h5 class="card-header">Próximo da fila</h5>
+                    <div class="card-body">
+                        
+                        <h5 class="card-title">{{topo.nome || "Pilha Vazia"}}</h5>
+
+                        <a href="#" class="btn btn-success" v-on:click="remover">Atender</a>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card m-2">
+                    <h5 class="card-header">Pessoas na Fila</h5>
+                    <div class="card-body">
+                        <h1 class="card-title display-4">{{tamanho}}</h1>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+
+
+
+        <h3>Pilha: </h3>
+        <table class="table m-4">
+            <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Idade</th>
+                    <th scope="col">Chegada</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in pilha">
+                    <td>{{item.nome}}</td>
+                    <td>{{item.idade}}</td>
+                    <td>{{item.hora}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <!-- <script src="../css/bootstrap.bundle.min.js"></script> -->
+    <script src="../vue/vue.js"></script>
+    <script type="module" src="index.js"></script>
+</body>
+
+</html>

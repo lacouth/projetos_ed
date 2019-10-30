@@ -1,7 +1,7 @@
-import { Fila } from './fila.js'
+import { Pilha } from './pilha.js'
 import { No } from '../no/no.js'
 import { Paciente } from '../paciente/paciente.js'
-let f = new Fila;
+let f = new Pilha;
 
 var app = new Vue({
     el: '#app',
@@ -9,14 +9,14 @@ var app = new Vue({
         nome : '',
         idade: '',
         topo: '',
-        fila: '',
+        pilha: '',
         tamanho: 0
     },
     methods:{
         adicionar: function (event){
             f.adicionar(new No(new Paciente(this.nome,this.idade)));
             this.topo = f.mostrarElemento();
-            this.fila = f.obterFilaCompleta();
+            this.pilha = f.obterPilhaCompleta();
             this.tamanho = f.tamanho;
             this.nome = '';
             this.idade = '';
@@ -24,8 +24,10 @@ var app = new Vue({
         remover: function(event){
             f.remover();
             this.topo = f.mostrarElemento();
-            this.fila = f.obterFilaCompleta();
+            this.pilha = f.obterPilhaCompleta();
             this.tamanho = f.tamanho;
         }
     }
 })
+
+console.log(f.tamanho)

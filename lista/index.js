@@ -59,5 +59,3 @@ var app = new Vue({
         }
     }
 })
-
-console.log(f.tamanho)
