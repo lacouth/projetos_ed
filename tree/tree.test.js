@@ -25,7 +25,17 @@ describe('Testa inserção na arvore', () => {
         }
         expect(arvore.quantidade).toBe(4)
         expect(arvore.emLargura()).toStrictEqual([5,2,6,null,4,null,null,null,null])
-        console.log(arvore._raiz)
+        
     })
+
+    test('Cria JSON para renderizar árvore', () => {
+        const values = [5,2,6,4]
+        const arvore = new Arvore(new No(values[0]))
+        for(let i = 1; i < 4 ; i++ ){
+            arvore.inserir(new No(values[i]))
+        }
+        console.log(arvore.getJSON())
+        
+    });
 
 });
