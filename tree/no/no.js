@@ -3,6 +3,7 @@ class No{
         this._dado = dado
         this._esquerda = esquerda
         this._direita = direita
+        this._fb = 0
     }
 
     get dado(){
@@ -28,6 +29,14 @@ class No{
     set direita(p){
         this._direita = p;
     }
+
+    set fb(b){
+        this._fb = b
+    }
+
+    get fb(){
+        return this._fb
+    }
 }
 
-export{No}
+export{ No }

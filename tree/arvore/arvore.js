@@ -10,17 +10,21 @@ class Arvore {
             while (true) {
                 if (no.dado > p.dado) {
                     if (p.direita != null) {
+                        // p.fb--
                         p = p.direita
                     } else {
                         p.direita = no
+                        // p.fb--
                         this._quantidade++
                         break
                     }
                 } else {
                     if (p.esquerda != null) {
-                        p = p.esquerda
+                        // p.fb++
+                        p = p.esquerda    
                     } else {
                         p.esquerda = no
+                        // p.fb++
                         this._quantidade++
                         break
                     }
@@ -30,6 +34,18 @@ class Arvore {
             this._raiz = no
             this._quantidade++
         }
+        this.atualizaBalanceamentoDaArvore()
+    }
+
+    
+    getAltura(no){
+        let altura = 0
+        if( !no ){
+            altura = -1
+        }else{
+            altura = Math.max(this.getAltura(no.esquerda),this.getAltura(no.direita)) + 1
+        }
+        return altura
     }
 
     get raiz() {
@@ -79,16 +95,22 @@ class Arvore {
             level++
             fim = nos.length
             contador = nos.reduce((acc,v) => v ? ++acc : acc ,0)
-            
         }
-        return nos.map(n => n ? n.dado : n)
+        // this._level = level
+        // return nos.map(n => n ? n.dado : n)
+        return nos
+    }
+
+    atualizaBalanceamentoDaArvore(){
+        let nos = this.emLargura()
+        nos.map( n => n ? n.fb = this.getAltura(n.esquerda) - this.getAltura(n.direita): 0 )
     }
 
     getJSON(){
         let array = this.emLargura()
         
         let json = {
-            name: array[0],
+            name: `${array[0].dado} : ${array[0].fb}` ,
             children: this._getChildren(0,array)
         }
         return json  
@@ -103,17 +125,19 @@ class Arvore {
             if( nos[2*pai+1] != null ){ 
                 
                 children.push({
-                    name: nos[2*pai+1],
+                    name: `${nos[2*pai+1].dado} : ${nos[2*pai+1].fb}`  ,
                     children: this._getChildren(2*pai+1,nos)
                 })
 
             } 
 
             if( nos[2*pai+2] != null ){
+
                 children.push({
-                    name: nos[2*pai+2],
+                    name: `${nos[2*pai+2].dado} : ${nos[2*pai+2].fb}`,
                     children: this._getChildren(2*pai+2,nos)
                 })
+
             } 
 
             return children

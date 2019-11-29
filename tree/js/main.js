@@ -3,10 +3,19 @@ import { No } from '../no/no.js'
 
 const btn = document.querySelector('#inserir')
 const input = document.querySelector('#input')
+const level = document.querySelector('span')
 const arvore = new Arvore()
 
 
-btn.addEventListener('click',()=>{
+btn.addEventListener('click',()=>inserirNo())
+document.addEventListener('keyup',(event)=>{
+  if( event.key === 'Enter'){
+    return inserirNo()
+  }
+})
+
+function inserirNo(){
+
   const value = input.value
   let no = new No(parseInt(value))
   arvore.inserir(no)
@@ -20,4 +29,6 @@ btn.addEventListener('click',()=>{
   update(root);
 
   input.value = ""
-})
+  level.innerHTML = arvore.getAltura(arvore.raiz)
+
+}
