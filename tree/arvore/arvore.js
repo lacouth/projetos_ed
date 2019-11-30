@@ -4,27 +4,23 @@ class Arvore {
         this._lista = []
         this._quantidade = raiz ? 1 : 0
     }
-    inserir(no) {
+    inserir(no,comparador) {
         if(this._raiz != null){
             let p = this._raiz
             while (true) {
-                if (no.dado > p.dado) {
+                if (comparador(no,p)) {
                     if (p.direita != null) {
-                        // p.fb--
                         p = p.direita
                     } else {
                         p.direita = no
-                        // p.fb--
                         this._quantidade++
                         break
                     }
                 } else {
                     if (p.esquerda != null) {
-                        // p.fb++
                         p = p.esquerda    
                     } else {
                         p.esquerda = no
-                        // p.fb++
                         this._quantidade++
                         break
                     }
@@ -96,8 +92,6 @@ class Arvore {
             fim = nos.length
             contador = nos.reduce((acc,v) => v ? ++acc : acc ,0)
         }
-        // this._level = level
-        // return nos.map(n => n ? n.dado : n)
         return nos
     }
 
@@ -110,7 +104,7 @@ class Arvore {
         let array = this.emLargura()
         
         let json = {
-            name: `${array[0].dado} : ${array[0].fb}` ,
+            name: `${array[0].dado.titulo} : ${array[0].fb}` ,
             children: this._getChildren(0,array)
         }
         return json  
@@ -125,7 +119,7 @@ class Arvore {
             if( nos[2*pai+1] != null ){ 
                 
                 children.push({
-                    name: `${nos[2*pai+1].dado} : ${nos[2*pai+1].fb}`  ,
+                    name: `${nos[2*pai+1].dado.titulo} : ${nos[2*pai+1].fb}`  ,
                     children: this._getChildren(2*pai+1,nos)
                 })
 
@@ -134,7 +128,7 @@ class Arvore {
             if( nos[2*pai+2] != null ){
 
                 children.push({
-                    name: `${nos[2*pai+2].dado} : ${nos[2*pai+2].fb}`,
+                    name: `${nos[2*pai+2].dado.titulo} : ${nos[2*pai+2].fb}`,
                     children: this._getChildren(2*pai+2,nos)
                 })
 
@@ -142,6 +136,74 @@ class Arvore {
 
             return children
         }
+
+    }
+    balancearArvore(){
+        let nos = this.emLargura()
+        for( let i = 0 ; i<nos.length ; i++){
+            if ( nos[i] && Math.abs(nos[i].fb) > 1 ){
+                
+                if( nos[i].fb >0 && nos[i].esquerda.fb < 0){
+                    nos[i].esquerda = this.rotacionarAEsquerda(nos[i].esquerda)
+                    if(i != 0){
+                        let idx = parseInt((i-1)/2)
+                        nos[idx].esquerda = this.rotacionarADireita(nos[i])
+                    }else{
+                        this.rotacionarADireita(nos[i])
+                    }
+                    this.atualizaBalanceamentoDaArvore()
+                    break
+                }else if (nos[i].fb < 0 && nos[i].direita.fb > 0){
+                    nos[i].direita = this.rotacionarADireita(nos[i].direita)
+                    if( i != 0){
+                        let idx = parseInt((i-2)/2)  
+                        nos[idx].direita = this.rotacionarAEsquerda(nos[i])
+                    } else {
+                        this.rotacionarAEsquerda(nos[i])
+                    }
+
+                    this.atualizaBalanceamentoDaArvore()
+                    break
+                }else if ( nos[i].fb > 0 ){
+                    this.rotacionarADireita(nos[i])
+                    this.atualizaBalanceamentoDaArvore()
+                    break
+                }else{
+                    this.rotacionarAEsquerda(nos[i])
+                    this.atualizaBalanceamentoDaArvore()
+                    break
+                }
+            }
+        }
+    }
+
+    rotacionarADireita(no){
+
+        let flag = false
+        if (no === this._raiz) flag = true
+
+        let p = no.esquerda
+        no.esquerda = p.direita
+        p.direita = no
+
+        if (flag) this._raiz = p
+
+        return p
+        
+    }
+
+    rotacionarAEsquerda(no){
+        let flag = false
+
+        if(no===this._raiz) flag = true
+
+        let p = no.direita
+        no.direita = p.esquerda
+        p.esquerda = no
+
+        if(flag) this._raiz = p
+        
+        return p
 
     }
 }
