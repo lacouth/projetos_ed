@@ -9,6 +9,13 @@ const input_id = document.querySelector('#input_id')
 const level = document.querySelector('span')
 const btn_balancear = document.querySelector('#balancear')
 const ul = document.querySelector('ul')
+const btn_id = document.querySelector('#ordenarPorId')
+const btn_titulo = document.querySelector('#ordenarPorTitulo')
+const btn_busca_id = document.querySelector('#buscar_id')
+const btn_busca_ano = document.querySelector('#buscar_ano')
+
+
+
 const arvore = new Arvore()
 
 
@@ -19,10 +26,14 @@ document.addEventListener('keyup',(event)=>{
   }
 })
 
+btn_id.addEventListener('click',()=>atualizarListaDeFilmesPorId())
+btn_titulo.addEventListener('click',()=>atualizarListaDeFilmesPorTitulo())
+btn_busca_id.addEventListener('click', ()=>buscarPorId())
+btn_busca_ano.addEventListener('click',()=>buscarPorAno())
+
 btn_balancear.addEventListener('click',()=>{
   arvore.balancearArvore()
   atualizarArvore()
-  console.log(arvore.listaDeNosEmOrdem)
 })
 
 function atualizarArvore(){
@@ -35,8 +46,11 @@ function atualizarArvore(){
   update(root);
 
   input.value = ""
+  input_ano.value = ""
+  input_id.value = ""
+  input.focus()
   level.innerHTML = arvore.getAltura(arvore.raiz)
-  atualizarListaDeFilmes()
+  atualizarListaDeFilmesPorId()
 
 }
 
@@ -46,18 +60,58 @@ function inserirNo(){
   const ano = input_ano.value
   const id =  input_id.value
   let no = new No(new Filme(nome,ano,id))
-  arvore.inserir(no,(a,b)=>a.dado.titulo>b.dado.titulo)
+  arvore.inserir(no,(a,b)=>parseInt(a.dado.id)>parseInt(b.dado.id))
   atualizarArvore()
+  atualizarListaDeFilmesPorId()
   
 }
 
-function atualizarListaDeFilmes(){
-  const nos = arvore.listaDeNosEmOrdem
+function atualizarListaDeFilmes(nos){
   let lista = ''
   for(let no of nos){
     lista+= `<li> ${no.titulo} - ${no.ano} - ${no.id}</li>`
   }
-
   ul.innerHTML = lista
+}
+
+function atualizarListaDeFilmesPorId(){
+  const nos = arvore.listaDeNosEmOrdem
+  atualizarListaDeFilmes(nos)
+}
+
+function atualizarListaDeFilmesPorTitulo(){
+  const nos = arvore.listaDeNosEmOrdem.sort((a,b)=> a.titulo>b.titulo ? 1 : -1)
+  console.log(nos)
+  atualizarListaDeFilmes(nos)
+}
+
+function buscarPorId(){
+  const id = document.querySelector('#id').value
+  const p = document.querySelector('p')
+  const no = arvore.buscarPorId(parseInt(id))
+  if (no != -1){
+    p.innerHTML = `${no.titulo} - ${no.ano} - ${no.id}`
+  }else{
+    p.innerHTML = 'Filme não encontrado'
+  }
+  document.querySelector('#id').value = ''
+}
+
+function buscarPorAno(){
+  const ano = document.querySelector('#ano').value
+  const resultados = arvore.buscarPorAno(parseInt(ano))
+  
+  if( resultados.length > 0){
+    let string = ''
+    for(let no of resultados){
+      string+= `<li>${no.titulo} - ${no.ano} - ${no.id}</li>`
+    }
+    document.querySelector('#resultado_busca_ano').innerHTML = string
+  }else{
+    document.querySelector('#resultado_busca_ano').innerHTML = "Ano sem filmes cadastrados"
+  }
+
+  document.querySelector('#ano').value = ''
+  
 
 }

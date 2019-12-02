@@ -104,7 +104,7 @@ class Arvore {
         let array = this.emLargura()
         
         let json = {
-            name: `${array[0].dado.titulo} : ${array[0].fb}` ,
+            name: `${array[0].dado.titulo} - ${array[0].dado.id} : ${array[0].fb}` ,
             children: this._getChildren(0,array)
         }
         return json  
@@ -119,7 +119,7 @@ class Arvore {
             if( nos[2*pai+1] != null ){ 
                 
                 children.push({
-                    name: `${nos[2*pai+1].dado.titulo} : ${nos[2*pai+1].fb}`  ,
+                    name: `${nos[2*pai+1].dado.titulo} - ${nos[2*pai+1].dado.id} : ${nos[2*pai+1].fb}`  ,
                     children: this._getChildren(2*pai+1,nos)
                 })
 
@@ -128,7 +128,7 @@ class Arvore {
             if( nos[2*pai+2] != null ){
 
                 children.push({
-                    name: `${nos[2*pai+2].dado.titulo} : ${nos[2*pai+2].fb}`,
+                    name: `${nos[2*pai+2].dado.titulo} - ${nos[2*pai+2].dado.id} : ${nos[2*pai+2].fb}`,
                     children: this._getChildren(2*pai+2,nos)
                 })
 
@@ -204,7 +204,20 @@ class Arvore {
         if(flag) this._raiz = p
         
         return p
+    }
 
+    buscarPorId(id){
+        let p = this._raiz
+        while( p != null){
+            if (p.dado.id == id){
+                break
+            }
+            p =  id > p.dado.id ? p.direita : p.esquerda
+        }
+        return p != null ? p.dado : -1
+    }
+    buscarPorAno(ano){
+        return this.listaDeNosEmOrdem.filter(a=>a.ano == ano)
     }
 }
 

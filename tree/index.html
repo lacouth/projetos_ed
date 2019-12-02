@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <title>Árvore</title>
 </head>
+
 <body>
 
     <div class="container">
@@ -16,19 +18,35 @@
             <input type="text" name="" id="input_ano" placeholder="Ano">
             <input type="text" name="" id="input_id" placeholder="id">
             <button class="btn btn-primary" id="inserir">Inserir</button>
-            <button class="btn btn-danger" id="balancear" >Balancear Árvore</button>
-            <h1>Altura: <span></span></h1>
+            <button class="btn btn-danger" id="balancear">Balancear Árvore</button>
+            <h4>Altura da árvore: <span></span></h4>
         </div>
 
         <div id="arvore"></div>
         <div>
+            <button class="btn btn-primary" id="ordenarPorId">Ordenar por Id</button>
+            <button class="btn btn-danger" id="ordenarPorTitulo">Ordenar por título</button>
             <ul></ul>
         </div>
+
+        <div>
+            <input type="text" id="id" placeholder="Id para busca">
+            <button class="btn btn-primary" id="buscar_id">Buscar</button>
+            <p id='resultado_busca_id'></p>
+        </div>
+
+        <div>
+            <input type="text" id="ano" placeholder="Ano para busca">
+            <button class="btn btn-primary" id="buscar_ano">Buscar</button>
+            <ul id='resultado_busca_ano'></ul>
+        </div>
+
     </div>
-    
+
 
     <script src="js/d3/d3.v3.min.js"></script>
     <script src="js/tree_render.js"></script>
     <script type="module" src="js/main.js"></script>
 </body>
+
 </html>
